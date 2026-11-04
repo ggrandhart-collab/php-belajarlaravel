@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $settings = Setting::pluck('value','key'); //select value, key from settings
+        // $settings['site_logo']->value;
+        View::share('settings', $settings);
     }
 }

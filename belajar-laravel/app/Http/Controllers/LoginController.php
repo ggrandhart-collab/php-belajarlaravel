@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function login()
     {
-        return view('login');
+        return view('admin.login');
     }
 
     public function actionLogin(Request $request)
@@ -18,6 +18,7 @@ class LoginController extends Controller
             'email' => ['email', 'required'],
             'password' => ['required'],
         ]);
+        
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(route('admin.dashboard.index'))

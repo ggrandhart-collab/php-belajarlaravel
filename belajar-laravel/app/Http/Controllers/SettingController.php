@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-
 class SettingController extends Controller
 {
     public function index()
@@ -34,6 +33,15 @@ class SettingController extends Controller
             'url_tiktok' => 'nullable|url|max:1000',
         ]);
 
+        if($request->hasFile('site_logo')){
+            $setting = Setting::where('key','site_logo')->first();
+            if($setting && $setting->value){
+                //hapus gambar
+                Storage::disk('public')->delete($setting->value);
+            }
+            $path = $request->file('site_logo')->store('setting','public');
+        }
+
         $ignoreKeys = ['site_logo'];
 
         foreach ($validated as $key => $value) {
@@ -44,10 +52,10 @@ class SettingController extends Controller
             Setting::updateOrCreate(
                 ['key' => $key],
                 [
-                    'value' => $value,
-                    'label' => ucwords(str_replace('_', ' ', $key)),
+                    'value' => $path,
+                    'label' => "Site Logo", // Site Name
                     'group' => 'general',
-                    'type' => 'text'
+                    'type' => 'image'
                 ]
             );
         }
@@ -55,3 +63,4 @@ class SettingController extends Controller
             ->with('success', 'pengaturan website PPKD sticker Berhasil disimpan!');
     }
 }
+

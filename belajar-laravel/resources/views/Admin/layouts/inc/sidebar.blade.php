@@ -50,16 +50,23 @@
             <div class="sidebar-menu-title">Pages</div>
             <ul class="sidebar-menu-list">
                 <li class="sidebar-menu-item">
-                    <a href="page-blank.html" class="sidebar-menu-link active" id="menu-blankpage" title="Blank Page">
+                    <a href="{{route('admin.category.index')}}" class="sidebar-menu-link active" id="menu-blankpage" title="Blank Page">
                         <i class="bi bi-file-earmark"></i>
-                        <span>Blank Page</span>
+                        <span>Kategori Produk</span>
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="{{ route('admin.settings') }}" class="sidebar-menu-link" id="menu-loginpage"
+                    <a href="{{ route('admin.user.index') }}" class="sidebar-menu-link" id="menu-loginpage"
                         title="Login Page">
                         <i class="bi bi-people"></i>
                         <span>User</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="{{ route('admin.product.index') }}" class="sidebar-menu-link" id="menu-loginpage"
+                        title="Login Page">
+                        <i class="bi bi-people"></i>
+                        <span>Product</span>
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
